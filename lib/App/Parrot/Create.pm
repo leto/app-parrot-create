@@ -2,7 +2,6 @@ package App::Parrot::Create;
 use Dancer ':syntax';
 use Archive::Zip qw( :ERROR_CODES :CONSTANTS );
 use File::Temp qw/tempfile tempdir/;
-use File::Spec::Functions;
 use File::Path qw/make_path/;
 use autodie qw/:all/;
 
