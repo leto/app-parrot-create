@@ -1,4 +1,14 @@
-Submit template
-<% name %>
-<% builder %>
-<% harness %>
+<div id="message">
+<p>
+Your thingy was created successfully! <br/>
+
+<a href="<% archive %>">Download</a> it now. <br/>
+
+Happy hacking!
+
+</p>
+
+Name: <% name %><br/>
+Builder: <% builder %><br/>
+Harness: <% harness %><br/>
+</div>

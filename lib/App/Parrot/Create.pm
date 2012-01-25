@@ -1,9 +1,12 @@
 package App::Parrot::Create;
 use Dancer ':syntax';
+use Dancer::Config;
 use Archive::Zip qw( :ERROR_CODES :CONSTANTS );
 use File::Temp qw/tempfile tempdir/;
 use File::Path qw/make_path/;
 use autodie qw/:all/;
+use File::Spec::Functions;
+use Cwd;
 
 our $VERSION = '0.1';
 
@@ -30,12 +33,20 @@ post '/submit' => sub {
     my $dir_member = $zip->addDirectory("$dir/");
 
     debug("Going to write a zip file to $dir.zip");
-    unless ( $zip->writeToFileNamed("/tmp/$time-$name.zip") == AZ_OK ) {
+    my $cwd = getcwd;
+    my $archive = catfile((config->{appdir},"public","tmp","$time-$name.zip"));
+    unless ( $zip->writeToFileNamed($archive) == AZ_OK ) {
         die 'write error';
     }
 
-    template 'submit',
-        { name => $name, builder => $builder, harness => $harness };
+    debug("Created $archive");
+
+    template 'submit', {
+        name    => $name,
+        builder => $builder,
+        harness => $harness,
+        archive => $archive,
+    };
 };
 
 true;
