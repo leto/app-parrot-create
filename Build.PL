@@ -13,9 +13,11 @@ my $builder = Module::Build->new(
         'Test::Most'      => 0,
     },
     requires => {
-        'YAML'         => 0,
-        'Dancer'       => 1.3040,
-        'Archive::Zip' => 0,
+        'autodie'             => 0,
+        'YAML'                => 0,
+        'Dancer'              => 1.3040,
+        'Archive::Zip'        => 0,
+        'IPC::System::Simple' => 0, # optional dependency of autodie
     },
     add_to_cleanup      => [ 'App-Parrot-Create-*' ],
     meta_merge     => {
