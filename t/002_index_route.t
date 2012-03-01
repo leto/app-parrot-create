@@ -24,4 +24,6 @@ my $r = dancer_response 'POST' => '/submit', {
 
 response_status_is $r => 200, 'response status is 200 for /submit' or diag Dumper [ $r ];
 
+response_content_like $r, qr/Happy hacking!/, 'Happy hacking!';
+
 done_testing;
