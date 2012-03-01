@@ -1,0 +1,12 @@
+perl:
+  - "5.14"
+  - "5.12"
+before_script:
+notifications:
+  recipients:
+    - duke@leto.net
+  email:
+    on_success: change
+    on_failure: always
+#  irc:
+#      - "irc.parrot.org#parrot"
