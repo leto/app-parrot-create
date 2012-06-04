@@ -13,6 +13,7 @@ my $builder = Module::Build->new(
         'Test::Most'      => 0,
     },
     requires => {
+        'Plack::Request'      => 0,
         'autodie'             => 0,
         'YAML'                => 0,
         'Dancer'              => 1.3040,
