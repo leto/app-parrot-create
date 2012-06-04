@@ -5,7 +5,7 @@ use Archive::Zip qw( :ERROR_CODES :CONSTANTS );
 use File::Temp qw/tempfile tempdir/;
 use File::Path qw/make_path/;
 use autodie qw/:all/;
-use File::Spec::Functions;
+use File::Spec qw/catdir catfile/;
 use Cwd;
 
 our $VERSION = '0.1';
@@ -34,7 +34,8 @@ post '/submit' => sub {
 
     debug("Going to write a zip file to $dir.zip");
     my $cwd = getcwd;
-    my $archive = catfile((config->{appdir},"public","tmp","$time-$name.zip"));
+    my $archive_dir = config->{archive_dir} || catdir((config->{appdir},"public","tmp"));
+    my $archive = catfile($archive_dir,"$time-$name.zip");
     unless ( $zip->writeToFileNamed($archive) == AZ_OK ) {
         die 'write error';
     }
